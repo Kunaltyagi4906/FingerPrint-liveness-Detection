@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        /* General body styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('/static/uploads/health.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Content box styling */
+        .content {
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            width: 60%;
+            height: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            color: white;
+        }
+
+        /* Image container box styling */
+        .image-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 50%;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        h3 {
+            font-size: 48px;
+            color: red;
+            margin: 20px 0;
+        }
+
+        .details p {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        /* Button styling */
+        .content a {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>Fingerprint Spoof Detection Result</h2>
+
+        <!-- Image box -->
+        {% if filename %}
+        <div class="image-box">
+            <img src="{{ url_for('static', filename=filename) }}" alt="Uploaded Fingerprint Image">
+        </div>
+        {% endif %}
+
+        <h3>Prediction: {{ label }}</h3>
+
+        <!-- Treatment and Cure -->
+        <div class="details">
+            <p><strong>Result:</strong> {{ label }}</p>
+            <p><strong>What does it mean?</strong></p>
+            {% if label == 'Real' %}
+            <p>The fingerprint is authentic. No spoof detected.</p>
+            {% else %}
+            <p>The fingerprint appears to be altered. Please verify the authenticity of the fingerprint.</p>
+            {% endif %}
+        </div>
+
+        <a href="/">Go Back to Home</a>
+    </div>
+</body>
+</html>
